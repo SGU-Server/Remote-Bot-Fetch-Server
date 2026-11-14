@@ -1,0 +1,49 @@
+# gradle
+
+.gradle/
+build/
+out/
+classes/
+.gradle-user/
+
+# eclipse
+
+*.launch
+
+# idea
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# vscode
+
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# macos
+
+*.DS_Store
+
+# fabric
+
+run/
+run-obsuscated/
+
+node_modules
+
+*.lck
+*.part
+.pnpm-store
+
+# python
+
+.pycache
+__pycache__
+
+# gemini
+.gemini/

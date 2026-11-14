@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "com.sguserver.remotebotfetch.mixin",
+  "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
+  "mixins": [
+    "util.FakePlayerSilencePlayerListMixin",
+    "util.FakePlayerSilenceServerGamePacketListenerMixin",
+    "util.carpet.EntityPlayerMPFakeOfflineProfileMixin",
+    "util.carpet.EntityPlayerMPFakeSilenceMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

@@ -1,0 +1,57 @@
+remotebotfetch:
+  message:
+    cleanGetItemBot:
+      botsWithItem: "%d get-item fake players have items"
+      cleaned: "Cleaned get-item fake players: %s"
+      started: Started cleaning items from get-item fake players
+      tutor:
+        "0": Use /cleanGetItemBot view
+        "1": "View how many get-item fake players still have items\n"
+        "2": Use /cleanGetItemBot clean <n>
+        "3": "Automatically clean items from get-item fake players, up to n stacks\n"
+        "4": "Example: /cleanGetItemBot clean 256"
+        "5": cleans up to 256 stacks
+    common:
+      unknownError: Unknown error
+      command:
+        playerOnly: "%s can only be used by a player"
+        noPermission: "You do not have permission to execute %s. Configure it with the Carpet rule %s"
+    getItem:
+      botResultSeparator: ": "
+      botResultCountSuffix: " x%d"
+      countOutOfRange: "Count must be between 1 and %d"
+      countTooSmall: "Count must be at least 1"
+      donePrefix: "Get item complete: "
+      doneCount: " x%d"
+      rateLimited: "Get item requests are too frequent. Please wait %d seconds"
+      started: Get item started
+      tutor:
+        "0": Use /getItem <item> <count>
+        "1": "Fetch the specified amount of an item from storage\n"
+        "2": Use /getItem <item> <count> nbt
+        "3": Return results as an NBT list for scripts
+carpet:
+  rule:
+    commandSetPassword:
+      desc: Enable "/setPassword" command
+    commandGetItem:
+      desc: Enable "/getItem <item> <count>" command
+    commandGetStorageData:
+      desc: Enable "/getStorageData" and "/getStorageData <id>" command
+    commandCleanGetItemBot:
+      desc: Enable "/cleanGetItemBot" command
+    getItemBotPrefix:
+      desc: Set the naming prefix for auto item-fetch bots
+      extra:
+        "0": Bot name format is <prefix><index>
+        "1": 'Example: if prefix is "bot_getitem_", names are "bot_getitem_1", "bot_getitem_2", ...'
+    getItemDelayMs:
+      desc: Set the wait time between each container-fetch call in getItem (milliseconds)
+    getItemCooldownSeconds:
+      desc: Set per-player cooldown between getItem requests (seconds, 0 = disabled)
+    getStorageDataCooldownSeconds:
+      desc: Set per-player cooldown between storage data queries (seconds, 0 = disabled)
+    getItemMaxCount:
+      desc: Set the maximum item count accepted by getItem in a single request (0 = unlimited)
+    getItemMaxBots:
+      desc: Set the maximum number of fake players that getItem may summon per request (0 = unlimited)

@@ -1,0 +1,67 @@
+remotebotfetch:
+  message:
+    cleanGetItemBot:
+      botsWithItem: "有物品的假人共 %d 个"
+      cleaned: "假人已清理：%s"
+      started: 已开始清理取物假人的物品
+      tutor:
+        "0": 使用 /cleanGetItemBot view
+        "1": "查看有物品的取物假人数量\n"
+        "2": 使用 /cleanGetItemBot clean <n>
+        "3": "自动清理n堆取物假人背包内的物品\n"
+        "4": 如 /cleanGetItemBot clean 256
+        "5": 自动清理256堆
+    common:
+      unknownError: 未知错误
+      command:
+        playerOnly: "%s 只能由玩家执行"
+        noPermission: "没有权限执行 %s，可以通过 Carpet 规则 %s 配置权限"
+    getItem:
+      botResultSeparator: "："
+      botResultCountSuffix: " x%d"
+      countOutOfRange: "数量必须在 1 到 %d 之间"
+      countTooSmall: 数量至少为 1
+      donePrefix: 获取物品完成：
+      doneCount: " x%d"
+      rateLimited: "获取物品请求过快，请等待 %d 秒"
+      started: 获取物品已开始执行
+      tutor:
+        "0": 使用 /getItem <item> <count>
+        "1": "从仓储系统中按数量取出指定物品\n"
+        "2": 使用 /getItem <item> <count> nbt
+        "3": 以 NBT 列表形式返回结果，便于脚本调用
+carpet:
+  rule:
+    commandSetPassword:
+      name: 设置密码命令
+      desc: 启用 "/setPassword" 命令
+    commandGetItem:
+      name: 取物命令
+      desc: 启用 "/getItem <item> <count>" 命令
+    commandGetStorageData:
+      name: 仓库数据查询命令
+      desc: 启用 "/getStorageData" 和 "/getStorageData <id>" 命令
+    commandCleanGetItemBot:
+      name: 取物假人检查命令
+      desc: 启用 "/cleanGetItemBot" 命令
+    getItemBotPrefix:
+      name: 取物假人前缀
+      desc: 设置自动取物假人的命名前缀
+      extra:
+        "0": 假人名称格式为 <prefix><index>
+        "1": 示例：前缀为 "bot_getitem_" 时，名称会是 "bot_getitem_1"、"bot_getitem_2"……
+    getItemDelayMs:
+      name: 取物容器调用间隔
+      desc: 设置 getItem 中每次调用容器取物之间的等待时间（单位：毫秒）
+    getItemCooldownSeconds:
+      name: 取物限速
+      desc: 设置同一玩家名两次 getItem 请求之间的冷却时间（单位：秒，0为关闭）
+    getStorageDataCooldownSeconds:
+      name: 仓库查询限速
+      desc: 设置同一玩家名两次仓库查询之间的冷却时间（单位：秒，0为关闭）
+    getItemMaxCount:
+      name: 取物单次最大数量
+      desc: 设置 getItem 单次请求允许的最大物品数量（0为不限制）
+    getItemMaxBots:
+      name: 取物单次假人上限
+      desc: 设置 getItem 单次请求最多可召唤的假人数量（0为不限制）

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "${description}",
+  "authors": ["jasonxue"],
+  "contact": {
+    "homepage": "${website}",
+    "issues": "${issues}",
+    "sources": "${source}"
+  },
+  "license": "GPL-3.0-only",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.sguserver.remotebotfetch.Mod"],
+    "preLaunch": ["com.sguserver.remotebotfetch.PreLaunch"]
+  },
+  "mixins": ["remote-bot-fetch-server.mixins.json"],
+  "accessWidener": "remote-bot-fetch-server.accesswidener",
+  "depends": {
+    "fabricloader": "${fabricloader_dependency}",
+    "minecraft": "${minecraft_dependency}",
+    "carpet": "*"
+  }
+}
