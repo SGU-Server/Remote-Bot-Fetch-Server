@@ -85,7 +85,7 @@ jobs:
           path: mod-jars/*.jar
 
       - name: Publish with gradle (skip if already published)
-        if: inputs.release || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
+        if: inputs.release || github.ref == 'refs/heads/main'
         shell: bash
         run: |
           set +e  # we handle failure manually
