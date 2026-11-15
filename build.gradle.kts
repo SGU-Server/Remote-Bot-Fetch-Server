@@ -11,7 +11,6 @@ plugins {
     alias(libs.plugins.yamlang) apply false
     alias(libs.plugins.spotless)
     alias(libs.plugins.maven.publish)
-    alias(libs.plugins.node.gradle)
 }
 
 repositories {

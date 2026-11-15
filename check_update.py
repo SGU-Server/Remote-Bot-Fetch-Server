@@ -116,26 +116,6 @@ def eclipse_update_site_latest() -> str:
     )
 
 
-def node_latest(major: int | None = None) -> str:
-    data = fetch_json("https://nodejs.org/dist/index.json")
-    if not isinstance(data, list):
-        raise ValueError("Node index returned an unexpected payload")
-
-    for entry in data:
-        if not isinstance(entry, dict):
-            continue
-        if not isinstance(
-            version := entry.get("version"), str
-        ) or not version.startswith("v"):
-            continue
-        normalized = version.removeprefix("v")
-        if major is not None and not normalized.startswith(f"{major}."):
-            continue
-        return normalized
-
-    raise ValueError("Node index did not return a version")
-
-
 def load_versions() -> dict[str, str]:
     with VERSION_CATALOG.open("rb") as f:
         data = tomllib.load(f)
@@ -191,10 +171,6 @@ def check_maven_central(key: str, group: str, artifact: str) -> CheckSpec:
     )
 
 
-def check_node(key: str, major: int | None = None) -> CheckSpec:
-    return CheckSpec(key, "nodejs", node_latest, (major,))
-
-
 def check_github_release(key: str, owner: str, repo: str) -> CheckSpec:
     return CheckSpec(key, "github", github_latest_release, (owner, repo))
 
@@ -247,7 +223,6 @@ def build_specs() -> list[CheckSpec]:
             "me.fallenbreath",
             "conditional-mixin-fabric",
         ),
-        check_maven_central("jbcrypt", "org.mindrot", "jbcrypt"),
         check_maven_central("jspecify", "org.jspecify", "jspecify"),
         check_skip("preprocess", "jitpack-commit", "special"),
         check_gradle_plugin("yamlang", "me.fallenbreath.yamlang"),
@@ -257,9 +232,6 @@ def build_specs() -> list[CheckSpec]:
             "com.vanniktech.maven.publish",
             "com.vanniktech.maven.publish.gradle.plugin",
         ),
-        check_gradle_plugin("nodeGradle", "com.github.node-gradle.node"),
-        check_node("nodeRuntime", 24),
-        check_npm("pnpm", "pnpm"),
         check_npm("prettier", "prettier"),
         check_npm("prettierPlugin-toml", "prettier-plugin-toml"),
         check_npm("prettierPlugin-xml", "@prettier/plugin-xml"),

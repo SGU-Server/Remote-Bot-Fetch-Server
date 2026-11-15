@@ -4,9 +4,6 @@ preprocess = "c5abb4fb12"
 yamlang = "1.5.0"
 spotless = "8.7.0"
 mavenPublish = "0.37.0"
-nodeGradle = "7.1.0"
-nodeRuntime = "24.18.0"
-pnpm = "11.9.0"
 loader = "0.19.3"
 conditionalMixin = "0.6.4"
 prettier = "3.8.4"
@@ -28,4 +25,3 @@ preprocess = { id = "com.replaymod.preprocess", version.ref = "preprocess" }
 yamlang = { id = "me.fallenbreath.yamlang", version.ref = "yamlang" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
-node-gradle = { id = "com.github.node-gradle.node", version.ref = "nodeGradle" }
