@@ -21,7 +21,6 @@ val modDescription = gradleProperty("modDescription")
 val modSource = gradleProperty("modSource")
 val modWebsite = gradleProperty("modWebsite")
 val minecraftDependency = gradleProperty("minecraftDependency")
-val fabricloaderDependency = gradleProperty("fabricloaderDependency")
 val mavenGroup = gradleProperty("mavenGroup")
 val archivesBaseName = gradleProperty("archivesBaseName")
 val issueTrackerUrl: String = "$modSource/issues"
@@ -179,7 +178,6 @@ val modProperties =
         "website" to modWebsite,
         "issues" to issueTrackerUrl,
         "minecraft_dependency" to minecraftDependency,
-        "fabricloader_dependency" to fabricloaderDependency,
     )
 
 tasks.named<ProcessResources>("processResources") {

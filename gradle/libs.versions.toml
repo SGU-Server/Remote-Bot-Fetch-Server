@@ -1,10 +1,10 @@
 [versions]
-fabricLoom = "1.17-SNAPSHOT"
+fabricLoom = "1.19-SNAPSHOT"
 preprocess = "c5abb4fb12"
 yamlang = "1.5.0"
 spotless = "8.7.0"
 mavenPublish = "0.37.0"
-loader = "0.19.3"
+loader = "0.20.1"
 conditionalMixin = "0.6.4"
 prettier = "3.8.4"
 prettierPlugin-toml = "2.0.6"

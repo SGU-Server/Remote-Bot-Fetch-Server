@@ -19,7 +19,7 @@
   "mixins": ["remote-bot-fetch-server.mixins.json"],
   "accessWidener": "remote-bot-fetch-server.accesswidener",
   "depends": {
-    "fabricloader": "${fabricloader_dependency}",
+    "fabricloader": "*",
     "minecraft": "${minecraft_dependency}",
     "carpet": "*"
   },
