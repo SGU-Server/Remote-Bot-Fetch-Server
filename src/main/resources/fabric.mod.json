@@ -22,5 +22,17 @@
     "fabricloader": "${fabricloader_dependency}",
     "minecraft": "${minecraft_dependency}",
     "carpet": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "badges": ["library"],
+      "parent": "remote-bot-fetch",
+      "links": {
+        "modmenu.website": "${website}",
+        "modmenu.github_releases": "${source}/releases",
+        "modmenu.issues": "${issues}"
+      },
+      "update_checker": false
+    }
   }
 }
