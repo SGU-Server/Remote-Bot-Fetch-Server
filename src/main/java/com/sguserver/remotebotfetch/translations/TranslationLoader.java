@@ -31,7 +31,7 @@ import com.google.gson.reflect.TypeToken;
 import com.sguserver.remotebotfetch.Mod;
 
 final class TranslationLoader {
-    private static final String RESOURCE_DIR = "assets/" + Mod.COMPACT_NAME + "/lang";
+    private static final String RESOURCE_DIR = "assets/remotebotfetchserver/lang";
     private static final Gson GSON = new Gson();
 
     private TranslationLoader() {}

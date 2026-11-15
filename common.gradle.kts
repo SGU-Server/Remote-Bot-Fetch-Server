@@ -92,7 +92,7 @@ dependencies {
 }
 
 val mixinConfigPath = "remote-bot-fetch-server.mixins.json"
-val langDir = "assets/remotebotfetch/lang"
+val langDir = "assets/remotebotfetchserver/lang"
 val javaCompatibility =
     when {
         mcVersion >= 26_00_00 -> JavaVersion.VERSION_25
