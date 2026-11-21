@@ -11,6 +11,20 @@ remotebotfetch:
         "3": "自动清理n堆取物假人背包内的物品\n"
         "4": 如 /cleanGetItemBot clean 256
         "5": 自动清理256堆
+    stashToBot:
+      done: "已把 %d 个物品放入假人 %s 的背包"
+      nothing: 选中的槽位没有可放入假人背包的物品
+      invalidBot: 假人名字不合法（只允许 1-16 位字母、数字或下划线）
+      noSlot: 没有选中任何槽位
+      spawnFailed: 无法召唤假人，请确认名字未被占用
+      busy: 该名字已被在线玩家使用
+      pending: 正在召唤假人 %s，物品会先替你保管
+      timeout: 假人召唤失败，物品已退回到你的背包
+      tutor:
+        "0": 使用 /stashToBot <假人名> <槽位...>
+        "1": "把当前打开的容器里指定槽位的物品放进假人背包\n"
+        "2": 假人不在线时会自动召唤
+        "3": 如 /stashToBot bot_qwp 5 6 12
     common:
       unknownError: 未知错误
       command:
