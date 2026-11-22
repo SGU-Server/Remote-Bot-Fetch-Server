@@ -23,13 +23,12 @@ import net.minecraft.commands.CommandSourceStack;
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import com.sguserver.remotebotfetch.stash.CommandStashToBot;
 import com.sguserver.remotebotfetch.storage.data.CommandGetStorageData;
 import com.sguserver.remotebotfetch.storage.getitem.CommandGetItem;
 import com.sguserver.remotebotfetch.storage.getitem.clean.CommandCleanGetItemBot;
 
 public final class SetupCommands {
-    private static final List<BaseCommand> COMMANDS = List.of(new CommandCleanGetItemBot(), new CommandStashToBot());
+    private static final List<BaseCommand> COMMANDS = List.of(new CommandCleanGetItemBot());
     private static final List<BaseCommandWithContext> COMMAND_WITH_CONTEXTS =
         List.of(new CommandGetItem(), new CommandGetStorageData());
 
