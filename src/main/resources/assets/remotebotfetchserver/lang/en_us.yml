@@ -11,20 +11,6 @@ remotebotfetch:
         "3": "Automatically clean items from get-item fake players, up to n stacks\n"
         "4": "Example: /cleanGetItemBot clean 256"
         "5": cleans up to 256 stacks
-    stashToBot:
-      done: "Moved %d items into the inventory of fake player %s"
-      nothing: The selected slots have no items to move into the fake player
-      invalidBot: Invalid fake player name (1-16 letters, digits or underscores)
-      noSlot: No slot selected
-      spawnFailed: Could not spawn the fake player, check that the name is free
-      busy: That name is already used by an online player
-      pending: Spawning fake player %s, the items are kept for you meanwhile
-      timeout: The fake player did not come online, the items were returned to your inventory
-      tutor:
-        "0": Use /stashToBot <bot> <slots...>
-        "1": "Move the items of the given slots of the open container into a fake player inventory\n"
-        "2": The fake player is spawned automatically when it is offline
-        "3": "Example: /stashToBot bot_qwp 5 6 12"
     common:
       unknownError: Unknown error
       command:
