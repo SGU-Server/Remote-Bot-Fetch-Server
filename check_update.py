@@ -216,13 +216,6 @@ def build_specs() -> list[CheckSpec]:
             "net.fabricmc",
             "fabric-loader",
         ),
-        check_custom_maven(
-            "conditionalMixin",
-            "fallenmaven",
-            "https://maven.fallenbreath.me/releases",
-            "me.fallenbreath",
-            "conditional-mixin-fabric",
-        ),
         check_maven_central("jspecify", "org.jspecify", "jspecify"),
         check_skip("preprocess", "jitpack-commit", "special"),
         check_gradle_plugin("yamlang", "me.fallenbreath.yamlang"),

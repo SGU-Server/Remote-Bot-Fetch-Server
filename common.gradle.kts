@@ -87,8 +87,6 @@ dependencies {
     autoCompileOnly(libs.jspecify.get())
     // runtime mods
     autoRuntimeOnly("me.fallenbreath:mixin-auditor:0.2.0-${if (unobfuscated) "u" else "o"}")
-
-    includeDependency(autoImplementation(libs.conditional.mixin.get()))
 }
 
 val mixinConfigPath = "remote-bot-fetch-server.mixins.json"

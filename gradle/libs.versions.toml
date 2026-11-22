@@ -5,7 +5,6 @@ yamlang = "1.5.0"
 spotless = "8.12.0"
 mavenPublish = "0.37.0"
 loader = "0.20.1"
-conditionalMixin = "0.6.5"
 prettier = "3.10.1"
 prettierPlugin-toml = "4.1.0"
 prettierPlugin-xml = "3.4.2"
@@ -15,7 +14,6 @@ jspecify = "1.0.1"
 
 [libraries]
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "loader" }
-conditional-mixin = { module = "me.fallenbreath:conditional-mixin-fabric", version.ref = "conditionalMixin" }
 jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }
 
 [plugins]
