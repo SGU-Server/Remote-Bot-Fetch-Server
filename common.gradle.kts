@@ -240,13 +240,6 @@ extensions.getByType(JavaPluginExtension::class).apply {
     withSourcesJar()
 }
 
-tasks.named<Jar>("jar") {
-    inputs.property("archives_base_name", archivesBaseName)
-    from(rootProject.file("LICENSE")) {
-        rename { name -> "${name}_${inputs.properties["archives_base_name"]}" }
-    }
-}
-
 tasks.withType<Javadoc>().configureEach {
     (options as StandardJavadocDocletOptions)
         .addBooleanOption("-no-fonts", true)
