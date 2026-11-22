@@ -29,8 +29,8 @@ import com.sguserver.remotebotfetch.Mod;
 import com.sguserver.remotebotfetch.lib.AsyncTasks;
 import com.sguserver.remotebotfetch.lib.MessageComponent;
 import com.sguserver.remotebotfetch.rule.Settings;
-import com.sguserver.remotebotfetch.rule.util.command.BaseCommand;
-import com.sguserver.remotebotfetch.rule.util.command.CommandUtils;
+import com.sguserver.remotebotfetch.rule.command.BaseCommand;
+import com.sguserver.remotebotfetch.rule.command.CommandUtils;
 
 public final class CommandCleanGetItemBot implements BaseCommand {
     private static boolean checkPermission(CommandSourceStack source) {

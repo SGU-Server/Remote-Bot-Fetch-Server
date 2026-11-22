@@ -14,16 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Remote Bot Fetch Server.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.sguserver.remotebotfetch.lib.check;
+package com.sguserver.remotebotfetch.rule.command;
 
-import org.jspecify.annotations.NonNull;
+import net.minecraft.commands.CommandSourceStack;
 
-public class CheckName {
-    public static boolean checkName(String input, @NonNull String setting, @NonNull String defaultName) {
-        return switch (setting) {
-            case "false" -> false;
-            case "true" -> defaultName.equalsIgnoreCase(input);
-            default -> setting.equalsIgnoreCase(input);
-        };
-    }
+import com.mojang.brigadier.CommandDispatcher;
+
+public interface BaseCommand {
+    void register(CommandDispatcher<CommandSourceStack> dispatcher);
 }

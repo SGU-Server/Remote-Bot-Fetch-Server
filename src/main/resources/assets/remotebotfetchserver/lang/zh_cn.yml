@@ -20,7 +20,6 @@ remotebotfetch:
       botResultSeparator: "："
       botResultCountSuffix: " x%d"
       countOutOfRange: "数量必须在 1 到 %d 之间"
-      countTooSmall: 数量至少为 1
       donePrefix: 获取物品完成：
       doneCount: " x%d"
       rateLimited: "获取物品请求过快，请等待 %d 秒"

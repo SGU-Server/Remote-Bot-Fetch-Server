@@ -29,7 +29,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +38,6 @@ import net.minecraft.world.level.block.ShulkerBoxBlock;
 import carpet.CarpetServer;
 
 import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
 
 public class Utils {
     public static boolean isShulkerBox(ItemStack stack) {
@@ -109,21 +107,10 @@ public class Utils {
     }
 
     public static void runOnServerThread(Runnable runnable) {
-        MinecraftServer server = getServer();
-        if (server.isSameThread()) {
+        runOnServerThread(() -> {
             runnable.run();
-            return;
-        }
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        server.execute(() -> {
-            try {
-                runnable.run();
-                future.complete(null);
-            } catch (Throwable throwable) {
-                future.completeExceptionally(throwable);
-            }
+            return null;
         });
-        future.join();
     }
 
     public static Item itemFromInput(ItemInput itemInput) {
@@ -138,36 +125,4 @@ public class Utils {
         return new ItemStack(item).getHoverName();
     }
 
-    public static int nonNegativeOrOrigin(int value, int original) {
-        return value < 0 ? original : value;
-    }
-
-    public static float nonNegativeOrOrigin(float value, float original) {
-        return value < 0 ? original : value;
-    }
-
-    public static int nonZeroOrMax(int value) {
-        return value == 0 ? Integer.MAX_VALUE : value;
-    }
-
-    /**
-     * Returns a positive value. 0 -> Integer.MAX_VALUE, negative -> original
-     *
-     * @param value any
-     * @param fallback should be positive
-     * @return a positive value based on the rules above
-     */
-    public static int forcePositive(int value, int fallback) {
-        return nonNegativeOrOrigin(nonZeroOrMax(value), fallback);
-    }
-
-    public static boolean isSamePlayer(@Nullable Player a, @Nullable Player b) {
-        if (a == b) {
-            return true;
-        }
-        if (a == null || b == null) {
-            return false;
-        }
-        return a.getUUID().equals(b.getUUID());
-    }
 }

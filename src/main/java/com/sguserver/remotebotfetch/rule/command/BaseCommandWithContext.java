@@ -14,24 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with Remote Bot Fetch Server.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.sguserver.remotebotfetch.translations;
+package com.sguserver.remotebotfetch.rule.command;
 
-import java.util.Locale;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
 
-import carpet.CarpetSettings;
+import com.mojang.brigadier.CommandDispatcher;
 
-final class TranslationLanguage {
-    private TranslationLanguage() {}
-
-    static String getServerLanguage() {
-        String language = CarpetSettings.language;
-        if (language == null || language.isBlank() || language.equalsIgnoreCase("none")) {
-            return TranslationStorage.DEFAULT_LANG;
-        }
-        return normalize(language);
-    }
-
-    static String normalize(String lang) {
-        return lang.toLowerCase(Locale.ROOT);
-    }
+public interface BaseCommandWithContext {
+    void register(CommandDispatcher<CommandSourceStack> dispatcher, final CommandBuildContext commandBuildContext);
 }

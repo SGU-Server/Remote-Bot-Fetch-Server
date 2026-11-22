@@ -42,25 +42,25 @@ public final class StorageSlotCounter {
             return new Result(Items.SHULKER_BOX, stack.getCount(), false);
         }
 
-        Result merged = null;
+        Item mergedItem = null;
+        int mergedCount = 0;
         for (ItemStack inner : Utils.nonItemCopyList(container)) {
             Result innerResult = count(inner);
             if (innerResult == null) {
                 continue;
             }
-            if (merged != null && merged.item() != innerResult.item()) {
+            if (mergedItem != null && mergedItem != innerResult.item()) {
                 return null;
             }
-            merged = new Result(innerResult.item(), (merged == null ? 0 : merged.count()) + innerResult.count(), false);
+            mergedItem = innerResult.item();
+            mergedCount += innerResult.count();
         }
 
-        if (merged == null) {
+        if (mergedItem == null) {
             return new Result(Items.SHULKER_BOX, stack.getCount(), false);
         }
-        if (merged.item() == Items.SHULKER_BOX) {
-            return new Result(Items.SHULKER_BOX, (merged.count() + 1) * stack.getCount(), false);
-        }
-        return new Result(merged.item(), merged.count() * stack.getCount(), false);
+        int count = mergedCount + (mergedItem == Items.SHULKER_BOX ? 1 : 0);
+        return new Result(mergedItem, count * stack.getCount(), false);
     }
 
     public static Item normalize(Item item) {

@@ -30,8 +30,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.sguserver.remotebotfetch.lib.GetPaths;
 import com.sguserver.remotebotfetch.lib.NameRateLimiter;
-import com.sguserver.remotebotfetch.lib.getvalue.GetPaths;
 import com.sguserver.remotebotfetch.rule.Settings;
 
 import org.jspecify.annotations.Nullable;

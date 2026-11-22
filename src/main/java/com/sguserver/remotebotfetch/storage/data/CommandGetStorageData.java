@@ -39,9 +39,9 @@ import com.sguserver.remotebotfetch.lib.MessageComponent;
 import com.sguserver.remotebotfetch.lib.NameRateLimiter;
 import com.sguserver.remotebotfetch.lib.Utils;
 import com.sguserver.remotebotfetch.rule.Settings;
-import com.sguserver.remotebotfetch.rule.util.command.BaseCommandWithContext;
-import com.sguserver.remotebotfetch.rule.util.command.CommandRateLimitNbt;
-import com.sguserver.remotebotfetch.rule.util.command.CommandUtils;
+import com.sguserver.remotebotfetch.rule.command.BaseCommandWithContext;
+import com.sguserver.remotebotfetch.rule.command.CommandRateLimitNbt;
+import com.sguserver.remotebotfetch.rule.command.CommandUtils;
 import com.sguserver.remotebotfetch.storage.StorageSlotCounter;
 
 public final class CommandGetStorageData implements BaseCommandWithContext {

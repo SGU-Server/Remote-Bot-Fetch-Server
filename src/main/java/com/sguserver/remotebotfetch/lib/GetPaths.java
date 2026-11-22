@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Remote Bot Fetch Server.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.sguserver.remotebotfetch.lib.getvalue;
+package com.sguserver.remotebotfetch.lib;
 
 import java.nio.file.Path;
 
@@ -24,7 +24,6 @@ import net.minecraft.world.level.storage.LevelResource;
 import net.fabricmc.loader.api.FabricLoader;
 
 import com.sguserver.remotebotfetch.Mod;
-import com.sguserver.remotebotfetch.lib.Utils;
 
 public final class GetPaths {
     public static Path getWorldPath() {

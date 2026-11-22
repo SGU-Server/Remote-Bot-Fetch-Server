@@ -32,7 +32,7 @@ import carpet.CarpetServer;
 
 import com.sguserver.remotebotfetch.lib.AsyncTasks;
 import com.sguserver.remotebotfetch.rule.Settings;
-import com.sguserver.remotebotfetch.rule.util.command.SetupCommands;
+import com.sguserver.remotebotfetch.rule.command.SetupCommands;
 import com.sguserver.remotebotfetch.storage.data.Storage;
 import com.sguserver.remotebotfetch.translations.Translations;
 

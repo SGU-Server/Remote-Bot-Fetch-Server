@@ -24,8 +24,8 @@ import java.util.UUID;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.world.level.storage.LevelResource;
 
+import com.sguserver.remotebotfetch.lib.GetPaths;
 import com.sguserver.remotebotfetch.lib.PlayerUtils;
-import com.sguserver.remotebotfetch.lib.getvalue.GetPaths;
 
 public final class OfflineInvCheck {
     private OfflineInvCheck() {}

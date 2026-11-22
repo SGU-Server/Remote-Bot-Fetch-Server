@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Remote Bot Fetch Server.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.sguserver.remotebotfetch.rule.util.command;
+package com.sguserver.remotebotfetch.rule.command;
 
 import java.util.List;
 

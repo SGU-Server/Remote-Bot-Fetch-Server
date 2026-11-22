@@ -92,10 +92,6 @@ public class GetItem {
         RATE_LIMITER.check("getItem", playerName, Settings.getItemCooldownSeconds);
     }
 
-    private static ItemStack quickMove(AbstractContainerMenu screenHandler, int slotIndex, EntityPlayerMPFake player) {
-        return screenHandler.quickMoveStack(player, slotIndex);
-    }
-
     private static FetchResult getItemFromSlot(ServerLevel level, BlockPos pos, int slotIndex,
         EntityPlayerMPFake player, Item item) {
 
@@ -127,7 +123,7 @@ public class GetItem {
             return new FetchResult(0, false);
         }
 
-        ItemStack moveResult = quickMove(screenHandler, slotIndex, player);
+        ItemStack moveResult = screenHandler.quickMoveStack(player, slotIndex);
 
         if (moveResult == ItemStack.EMPTY) {
             player.closeContainer();
@@ -148,92 +144,77 @@ public class GetItem {
     private static GetItemResult doGetItem(Item item, int count) {
         int maxBots = Settings.getItemMaxBots;
         int remainingBots = maxBots <= 0 ? Integer.MAX_VALUE : maxBots;
-        RoundResult roundResult = doGetItem(item, count, 1, remainingBots);
-        return new GetItemResult(roundResult.result());
-    }
-
-    private static RoundResult doGetItem(Item item, int count, int startBotIndex, int remainingBots) {
-        if (count <= 0) {
-            return new RoundResult(Map.of(), remainingBots);
-        }
-
-        List<Target> allTargets = collectSlotTargets(item);
-        List<Target> targets = GetItemSlotSelector.select(allTargets, count);
-        if (targets.isEmpty()) {
-            return new RoundResult(Map.of(), remainingBots);
-        }
-        targets.sort(Comparator.comparingInt((Target target) -> target.pos().getY()).reversed());
-
         LinkedHashMap<String, Map<Item, Integer>> result = new LinkedHashMap<>();
         int remaining = count;
-        int nextBotIndex = startBotIndex;
-        int fetchedThisRound = 0;
+        int nextBotIndex = 1;
+        while (remaining > 0 && remainingBots > 0) {
+            List<Target> targets = GetItemSlotSelector.select(collectSlotTargets(item), remaining);
+            if (targets.isEmpty()) {
+                break;
+            }
+            targets.sort(Comparator.comparingInt((Target target) -> target.pos().getY()).reversed());
+            boolean madeProgress = false;
+            EntityPlayerMPFake currentBot = null;
+            String currentBotName = null;
+            int currentBotFetched = 0;
 
-        EntityPlayerMPFake currentBot = null;
-        String currentBotName = null;
-        int currentBotFetched = 0;
-
-        try {
-            for (Target target : targets) {
-                if (remaining <= 0) {
-                    break;
-                }
-
-                if (currentBot == null) {
-                    if (remainingBots <= 0) {
+            try {
+                for (Target target : targets) {
+                    if (remaining <= 0) {
                         break;
                     }
-                    int botStartIndex = nextBotIndex;
-                    SpawnedFake spawned = spawnNextUsableBot(target, botStartIndex);
-                    currentBot = spawned.player();
-                    currentBotName = spawned.name();
-                    currentBotFetched = 0;
-                    nextBotIndex = spawned.nextIndex();
-                    remainingBots--;
-                }
 
-                EntityPlayerMPFake callBot = currentBot;
-                FetchResult fetched = Utils.runOnServerThread(() -> {
-                    MinecraftServer server = Utils.getServer();
-                    ServerLevel level = server.getLevel(target.dimension());
-                    if (level == null) {
-                        return new FetchResult(0, false);
+                    if (currentBot == null) {
+                        if (remainingBots <= 0) {
+                            break;
+                        }
+                        SpawnedFake spawned = spawnNextUsableBot(target, nextBotIndex);
+                        currentBot = spawned.player();
+                        currentBotName = spawned.name();
+                        nextBotIndex = spawned.nextIndex();
+                        remainingBots--;
                     }
-                    return getItemFromSlot(level, target.pos(), target.slotIndex(), callBot, item);
-                });
-                int got = fetched.count();
-                if (got > 0) {
-                    currentBotFetched += got;
-                    remaining -= got;
-                    fetchedThisRound += got;
-                }
 
-                if (remaining > 0) {
-                    waitBetweenCalls();
-                }
+                    EntityPlayerMPFake callBot = currentBot;
+                    FetchResult fetched = Utils.runOnServerThread(() -> {
+                        MinecraftServer server = Utils.getServer();
+                        ServerLevel level = server.getLevel(target.dimension());
+                        if (level == null) {
+                            return new FetchResult(0, false);
+                        }
+                        return getItemFromSlot(level, target.pos(), target.slotIndex(), callBot, item);
+                    });
+                    int got = fetched.count();
+                    if (got > 0) {
+                        currentBotFetched += got;
+                        remaining -= got;
+                        madeProgress = true;
+                    }
 
-                if (remaining <= 0 || fetched.inventoryFull()) {
+                    if (remaining > 0) {
+                        waitBetweenCalls();
+                    }
+
+                    if (remaining <= 0 || fetched.inventoryFull()) {
+                        addOneBotResult(result, currentBotName, item, currentBotFetched);
+                        FakePlayerSpawner.silenceLogout(currentBot);
+                        currentBot = null;
+                        currentBotName = null;
+                        currentBotFetched = 0;
+                    }
+                }
+            } finally {
+                if (currentBot != null) {
                     addOneBotResult(result, currentBotName, item, currentBotFetched);
                     FakePlayerSpawner.silenceLogout(currentBot);
-                    currentBot = null;
-                    currentBotName = null;
-                    currentBotFetched = 0;
                 }
             }
-        } finally {
-            if (currentBot != null) {
-                addOneBotResult(result, currentBotName, item, currentBotFetched);
-                FakePlayerSpawner.silenceLogout(currentBot);
+
+            if (!madeProgress) {
+                break;
             }
         }
-
-        if (remaining > 0 && fetchedThisRound > 0 && remainingBots > 0) {
-            RoundResult nextRound = doGetItem(item, remaining, nextBotIndex, remainingBots);
-            remainingBots = nextRound.remainingBots();
-            mergeResults(result, nextRound.result(), item);
-        }
-
-        return new RoundResult(result, remainingBots);
+        return new GetItemResult(result);
     }
 
     private static List<Target> collectSlotTargets(Item item) {
@@ -307,28 +288,6 @@ public class GetItem {
         }
     }
 
-    private static void mergeResults(Map<String, Map<Item, Integer>> base, Map<String, Map<Item, Integer>> extra,
-        Item item) {
-        if (extra == null || extra.isEmpty()) {
-            return;
-        }
-        for (Map.Entry<String, Map<Item, Integer>> entry : extra.entrySet()) {
-            String botName = entry.getKey();
-            int add = entry.getValue().getOrDefault(item, 0);
-            if (add <= 0) {
-                continue;
-            }
-            Map<Item, Integer> existing = base.get(botName);
-            if (existing == null) {
-                HashMap<Item, Integer> oneBot = new HashMap<>();
-                oneBot.put(item, add);
-                base.put(botName, oneBot);
-                continue;
-            }
-            existing.put(item, existing.getOrDefault(item, 0) + add);
-        }
-    }
-
     private record FetchResult(int count, boolean inventoryFull) {
     }
 
@@ -338,6 +297,4 @@ public class GetItem {
     public record GetItemResult(Map<String, Map<Item, Integer>> result) {
     }
 
-    private record RoundResult(Map<String, Map<Item, Integer>> result, int remainingBots) {
-    }
 }

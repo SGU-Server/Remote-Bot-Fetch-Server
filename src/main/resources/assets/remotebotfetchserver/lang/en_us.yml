@@ -20,7 +20,6 @@ remotebotfetch:
       botResultSeparator: ": "
       botResultCountSuffix: " x%d"
       countOutOfRange: "Count must be between 1 and %d"
-      countTooSmall: "Count must be at least 1"
       donePrefix: "Get item complete: "
       doneCount: " x%d"
       rateLimited: "Get item requests are too frequent. Please wait %d seconds"
