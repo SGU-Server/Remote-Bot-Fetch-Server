@@ -249,6 +249,11 @@ tasks.named<Jar>("jar") {
     }
 }
 
+tasks.withType<Javadoc>().configureEach {
+    (options as StandardJavadocDocletOptions)
+        .addBooleanOption("-no-fonts", true)
+}
+
 extensions.configure<MavenPublishBaseExtension>("mavenPublishing") {
     publishToMavenCentral(automaticRelease = true)
     signAllPublications()
