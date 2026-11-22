@@ -2,16 +2,16 @@
 fabricLoom = "1.19-SNAPSHOT"
 preprocess = "c5abb4fb12"
 yamlang = "1.5.0"
-spotless = "8.7.0"
+spotless = "8.12.0"
 mavenPublish = "0.37.0"
 loader = "0.20.1"
-conditionalMixin = "0.6.4"
-prettier = "3.8.4"
-prettierPlugin-toml = "2.0.6"
+conditionalMixin = "0.6.5"
+prettier = "3.10.1"
+prettierPlugin-toml = "4.1.0"
 prettierPlugin-xml = "3.4.2"
-eclipse = "R-4.40-202606010713"
+eclipse = "R-4.41-202608281142"
 ktlint = "1.8.0"
-jspecify = "1.0.0"
+jspecify = "1.0.1"
 
 [libraries]
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "loader" }
