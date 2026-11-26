@@ -18,8 +18,6 @@ package com.sguserver.remotebotfetch.menu;
 
 import java.util.List;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -27,7 +25,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.ArmorSlot;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -37,7 +34,6 @@ import net.minecraft.world.level.Level;
 
 import carpet.patches.EntityPlayerMPFake;
 
-import com.sguserver.remotebotfetch.Mod;
 import com.sguserver.remotebotfetch.lib.MessageComponent;
 
 import org.jspecify.annotations.Nullable;
@@ -64,14 +60,6 @@ public final class RbfBotInventoryMenu extends InventoryMenu {
     private static final int PLACEHOLDER_ROW_Y = 36;
     private static final Container PLACEHOLDER_CONTAINER = new SimpleContainer(1);
 
-    public static final MenuType<RbfBotInventoryMenu> TYPE = Registry.register(BuiltInRegistries.MENU,
-        //#if MC>=12111
-        net.minecraft.resources.Identifier.fromNamespaceAndPath(Mod.MOD_ID, "bot_inventory"),
-        //#else
-        //$$ net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Mod.MOD_ID, "bot_inventory"),
-        //#endif
-        new MenuType<>(RbfBotInventoryMenu::new, FeatureFlags.VANILLA_SET));
-
     private final Player viewer;
     private final Level openedLevel;
     private final @Nullable Level botOpenedLevel;
@@ -79,10 +67,6 @@ public final class RbfBotInventoryMenu extends InventoryMenu {
     private final List<EntityPlayerMPFake> choices;
     private boolean botVisible = true;
     private int botPage;
-
-    public static void register() {
-        // Initializing this class registers TYPE before the built-in registries freeze.
-    }
 
     public RbfBotInventoryMenu(int syncId, Inventory playerInventory) {
         this(syncId, playerInventory, null, List.of());
@@ -104,10 +88,10 @@ public final class RbfBotInventoryMenu extends InventoryMenu {
 
     @Override
     public MenuType<?> getType() {
-        // Vanilla clients do not know the custom menu type id. Client-only mods can register extra
-        // menu types, which shifts the numeric ids and makes the client open the wrong screen.
-        // Reporting the built-in crafting type keeps the packet id identical on both sides, and the
-        // client recognizes our menu by TITLE_KEY in BotInventoryMenuScreensMixin.
+        // Report a built-in menu type so players without the client mod can still join the server:
+        // registering a custom MenuType would add an entry to a synced registry and force every
+        // connecting client to install this mod. The client recognizes our menu by TITLE_KEY in
+        // BotInventoryMenuScreensMixin instead of by the menu type id.
         return MenuType.CRAFTING;
     }
 
