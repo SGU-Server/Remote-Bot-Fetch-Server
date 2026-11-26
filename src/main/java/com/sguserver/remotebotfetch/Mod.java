@@ -31,6 +31,7 @@ import carpet.CarpetExtension;
 import carpet.CarpetServer;
 
 import com.sguserver.remotebotfetch.lib.AsyncTasks;
+import com.sguserver.remotebotfetch.menu.BotInventorySessions;
 import com.sguserver.remotebotfetch.rule.Settings;
 import com.sguserver.remotebotfetch.rule.util.command.SetupCommands;
 import com.sguserver.remotebotfetch.storage.data.Storage;
@@ -85,6 +86,7 @@ public class Mod implements ModInitializer, CarpetExtension {
 
     @Override
     public void onServerClosed(MinecraftServer server) {
+        BotInventorySessions.clear();
         AsyncTasks.shutdown();
     }
 
