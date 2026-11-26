@@ -3,6 +3,10 @@
   "package": "com.sguserver.remotebotfetch.mixin",
   "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
   "mixins": [
+    "util.BotInventoryDeathMixin",
+    "util.BotInventoryOpenMixin",
+    "util.BotInventoryPlayerListMixin",
+    "util.BotInventoryRegistryMixin",
     "util.FakePlayerSilencePlayerListMixin",
     "util.FakePlayerSilenceServerGamePacketListenerMixin",
     "util.carpet.EntityPlayerMPFakeOfflineProfileMixin",

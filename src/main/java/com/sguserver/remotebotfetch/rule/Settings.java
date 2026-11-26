@@ -36,6 +36,10 @@ public final class Settings {
         validators = {Validators.CommandLevel.class})
     public static String commandCleanGetItemBot = "false";
 
+    @Rule(categories = {RBF, RuleCategory.COMMAND, RuleCategory.FEATURE, RuleCategory.SURVIVAL, RuleCategory.CREATIVE},
+        validators = {Validators.CommandLevel.class})
+    public static String botInventoryAccess = "true";
+
     @Rule(categories = {RBF, RuleCategory.FEATURE, RuleCategory.SURVIVAL, RuleCategory.CREATIVE})
     public static String getItemBotPrefix = "bot_getitem_";
 

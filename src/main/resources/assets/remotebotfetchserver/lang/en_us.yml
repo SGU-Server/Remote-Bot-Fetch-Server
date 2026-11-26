@@ -1,5 +1,13 @@
 remotebotfetch:
   message:
+    rbfBotInventory:
+      closed: "The inventory of %s is no longer accessible and was closed."
+      busy: "Another player is already viewing %s's inventory."
+      unavailable: "%s is no longer available."
+      emptyCursor: "Put down the item on your cursor before switching fake players."
+      noPermission: "You lack the permission to open fake player inventories. Configure it with the Carpet rule %s."
+      noBot: "No fake player is online. Spawn one with /player <name> spawn first."
+      busyAll: "Every online fake player is already opened by another player."
     cleanGetItemBot:
       botsWithItem: "%d get-item fake players have items"
       cleaned: "Cleaned get-item fake players: %s"
@@ -32,6 +40,8 @@ remotebotfetch:
         "3": Return results as an NBT list for scripts
 carpet:
   rule:
+    botInventoryAccess:
+      desc: Allow opening online fake-player inventories from the player inventory.
     commandSetPassword:
       desc: Enable "/setPassword" command
     commandGetItem:
