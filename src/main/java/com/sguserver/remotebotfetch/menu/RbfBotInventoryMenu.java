@@ -281,7 +281,9 @@ public final class RbfBotInventoryMenu extends InventoryMenu {
         if (this.bot == null || index < 0 || index >= this.slots.size() || !this.stillValid(player)) {
             return ItemStack.EMPTY;
         }
-        if (index < BOT_START && (!this.botVisible || index < PLAYER_CRAFTING_END)) {
+        // Shift clicking has to behave like the inventory it happens in: the player slots keep the vanilla
+        // crafting/armour/storage/hotbar routing, and the bot slots stay inside the bot storage.
+        if (index < BOT_START) {
             return super.quickMoveStack(player, index);
         }
         if (!this.botVisible) {
@@ -292,12 +294,9 @@ public final class RbfBotInventoryMenu extends InventoryMenu {
             return ItemStack.EMPTY;
         }
 
-        boolean fromBot = index >= BOT_START;
-        int targetStart = fromBot ? PLAYER_STORAGE_START : BOT_START;
-        int targetEnd = fromBot ? PLAYER_STORAGE_END : BOT_STORAGE_END;
         ItemStack stack = source.getItem();
         ItemStack original = stack.copy();
-        if (!this.moveItemStackTo(stack, targetStart, targetEnd, false)) {
+        if (!this.moveItemStackTo(stack, BOT_START, BOT_STORAGE_END, false)) {
             return ItemStack.EMPTY;
         }
         if (stack.isEmpty()) {
