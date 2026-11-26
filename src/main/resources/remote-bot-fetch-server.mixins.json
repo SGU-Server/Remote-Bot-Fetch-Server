@@ -6,7 +6,6 @@
     "util.BotInventoryDeathMixin",
     "util.BotInventoryOpenMixin",
     "util.BotInventoryPlayerListMixin",
-    "util.BotInventoryRegistryMixin",
     "util.FakePlayerSilencePlayerListMixin",
     "util.FakePlayerSilenceServerGamePacketListenerMixin",
     "util.carpet.EntityPlayerMPFakeOfflineProfileMixin",
